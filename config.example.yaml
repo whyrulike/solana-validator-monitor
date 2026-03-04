@@ -1,0 +1,38 @@
+# Solana Validator Monitor - Example Configuration
+# Copy this file to config.yaml and fill in your values.
+# Environment variables override YAML values (see README for mapping).
+
+solana:
+  rpc_urls:
+    - "https://api.mainnet-beta.solana.com"
+    - "https://solana-api.projectserum.com"
+  timeout_seconds: 30
+  max_retries: 3
+
+slack:
+  webhook_url: "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
+  rate_limit_per_minute: 30
+  dedup_cooldown_seconds: 300
+
+monitoring:
+  interval_seconds: 10
+  rpc_health_check_interval: 30
+  rpc_latency_threshold_ms: 2000
+  slot_miss_threshold: 5
+
+validator_identities:
+  - "ValidatorPubkey1..."
+  - "ValidatorPubkey2..."
+
+failover_nodes:
+  - id: "huawei-sg-01"
+    rpc_url: "http://huawei-sg-01:8899"
+    is_primary: true
+    health_check_failures_threshold: 3
+  - id: "ovh-sg-01"
+    rpc_url: "http://ovh-sg-01:8899"
+    is_primary: false
+    health_check_failures_threshold: 3
+
+version:
+  component: "jito-solana"
